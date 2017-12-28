@@ -13,14 +13,25 @@
     <sql id="Base_Column_List" >
         id, age, cup_size, herName, role
     </sql>
+    
+    <!-- 返回未删除的妹纸总数 -->
+    <select id="queryAllGirlsCount" resultType="java.lang.Long">
+    	select count(1) from girl where deleted = 0
+    </select>
 
     <!--返回所有数据-->
-    <select id="getAllGirls" resultMap="BaseResultMap" parameterType="java.lang.String" >
-        select * from girl
+    <select id="queryAllGirls" resultMap="BaseResultMap" parameterType="java.util.Map" >
+        select <include refid="Base_Column_List" />
+        	from girl where deleted = 0
+	        <if test="girlsName!=null and girlsName!=''">
+	        	and (herName like "%"#{girlsName}"%")
+	        </if>
+	        order by herName, age asc
+	        limit #{startIndex}, #{pageSize}
     </select>
 
     <!--根据名字返回数据-->
-    <select id="getGirlsName" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    <select id="queryGirlsName" resultMap="BaseResultMap" parameterType="java.lang.String" >
         select
         <include refid="Base_Column_List" />
         from girl

@@ -1,0 +1,16 @@
+
+@charset 'utf-8';
+
+.btn-primary {	
+	margin: 10px 0;
+}
+#girlsData {
+	margin: 0 auto;
+	min-height: 450px;
+	overflow: hidden;
+	border: 1px solid #f80;
+}
+#pageCont {
+	margin: 0 auto;
+	text-align: center;
+}
